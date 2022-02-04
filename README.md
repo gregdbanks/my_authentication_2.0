@@ -1,6 +1,6 @@
 # MERN :smiley:
 
-Mern Stack Guide for making a production ready authentication API utilizing json web tokens [JWT](https://jwt.io/)
+Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
 
 # System Requirements
 
