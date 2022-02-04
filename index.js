@@ -24,9 +24,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Middleware
-app.use(bodyParser.json());
-
 app.get("/", (req, res) => {
   res.json({ message: "API Working" });
 });
