@@ -1,0 +1,5 @@
+/* ALert.css */
+.alertMessage {
+    min-width: 200px;
+    justify-content: space-between;
+}
