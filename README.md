@@ -1,4 +1,8 @@
+<span style="text-align: center;">
+
 ![MERN](./images/MERN.png)
+
+</span>
 
 Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
 
