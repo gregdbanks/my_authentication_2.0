@@ -1,4 +1,4 @@
-# MERN :smiley:
+![MERN](./images/MERN.png)
 
 Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
 
