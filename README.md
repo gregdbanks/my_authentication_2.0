@@ -1,10 +1,16 @@
+## [What is MERN? Why use MERN?](https://www.mongodb.com/mern-stack)
+
+Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
+
+Hello everyone! This is about the shortest, most lightweight guide i could come up with on making a fullstack application utilizing the MERN stack. [What is MERN? Why use MERN?](https://www.mongodb.com/mern-stack)
+
+Almost every app you build will deal with authentication and this guide will give you everything you need to handle authentication with the MERN stack. Most courses you take include how to handle authentication but are 40 hours long so i really wanted to cut out as much abstraction as possible. Feel free to clone, fork, modify this app, make it your own. I insists.
+
 <span style="text-align: center;">
 
 ![MERN](./images/MERN.png)
 
 </span>
-
-Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
 
 # System Requirements
 
@@ -1314,4 +1320,4 @@ Now you should have something fully functional, to test:
 - user should be able to signup
 - user should be able to login and see private home page.
 
-# This wraps up the second part of this course and now you know how to use react with private routes and authentication on the client side.
+### Now you know how to make a production ready authentication API utilizing the MERN stack. Learn this well, and dont forget to give my [repo](https://github.com/gregdbanks/my_authentication_2.0) a star.
