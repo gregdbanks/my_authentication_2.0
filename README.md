@@ -1,10 +1,8 @@
-## [What is MERN? Why use MERN?](https://www.mongodb.com/mern-stack)
-
-Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
+## Mern Stack Guide for making a production ready authentication API utilizing [Json Web Tokens](https://jwt.io/)
 
 Hello everyone! This is about the shortest, most lightweight guide i could come up with on making a fullstack application utilizing the MERN stack. [What is MERN? Why use MERN?](https://www.mongodb.com/mern-stack)
 
-Almost every app you build will deal with authentication and this guide will give you everything you need to handle authentication with the MERN stack. Most courses you take include how to handle authentication but are 40 hours long so i really wanted to cut out as much abstraction as possible. Feel free to clone, fork, modify this app, make it your own. I insists.
+Almost every app you build will deal with authentication and this guide will give you everything you need to handle authentication with the MERN stack. Most courses you take include how to handle authentication but are 40 hours long so i really wanted to cut out as much abstraction as possible. Feel free to clone, fork, modify this app, make it your own. I insist. For repo [Click Here](https://github.com/gregdbanks/my_authentication_2.0)
 
 <span style="text-align: center;">
 
@@ -12,23 +10,23 @@ Almost every app you build will deal with authentication and this guide will giv
 
 </span>
 
-# System Requirements
+### System Requirements
 
 - [Node](https://nodejs.dev/learn/how-to-install-nodejs)
 - [NPM](https://docs.npmjs.com/cli/v7/configuring-npm/install)
 - [Git Bash](https://www.gitkraken.com/blog/what-is-git-bash)
 
-# What is JWT and why is it useful?
+### What is JWT and why is it useful?
 
 JWT is useful for Authorization and Information exchange. Can be sent via URL/ Post request/HTTP Header which makes it fast for transmission and usable. It contains the details of user (not session id in cookies like traditional request) so , :drum: :drum: :drum: , NO need to query database to get user details.
 
-# What to Know?
+### What to Know?
 
 You should know the basics of javascript and node, so this guide assumes both.
 
 We will be using MongoDB Atlas Cloud Database to store our users. [For more info...](https://docs.atlas.mongodb.com/)
 
-## Instructions for MongoDB Atlas (this is where you get your connection string needed later)
+### Instructions for MongoDB Atlas (this is where you get your connection string needed later)
 
 1. Visit [Official Docs](https://docs.atlas.mongodb.com/) , After signing up, click on `+ New Project`
 2. Name your project
@@ -46,7 +44,7 @@ We will be using MongoDB Atlas Cloud Database to store our users. [For more info
 
 ---
 
-## NPM packages we will be using
+### NPM packages we will be using
 
 - [express](http://expressjs.com/)
 
@@ -60,7 +58,7 @@ We will be using MongoDB Atlas Cloud Database to store our users. [For more info
 
 - [dotenv](https://www.npmjs.com/package/dotenv)
 
-# Initiate your project
+### Initiate your project
 
 1. Create a new folder call it 'my-authentication'
 2. Pull up terminal/git bash and execute this statement below
@@ -101,7 +99,7 @@ app.listen(PORT, (req, res) => {
 node index.js
 ```
 
-# Create User Model
+### Create User Model
 
 7. Create `.env` file at the root of your app, here is where you will store your connection string you recieved earlier doing the mongoDB Atlas section. Inside the `.env` file add this as well as your connection string:
 
@@ -195,7 +193,7 @@ app.listen(PORT, (req, res) => {
 
 > Notice we add [body-parser](https://www.npmjs.com/package/body-parser) which we will use to parse incoming request bodies.
 
-# Make Route for User signup
+### Make Route for User signup
 
 If new to routing click [here](https://expressjs.com/en/starter/basic-routing.html) to learn basics
 
@@ -335,7 +333,7 @@ app.listen(PORT, (req, res) => {
 
 ![postman](./images/postman.png)
 
-# Make Route for User login.
+### Make Route for User login.
 
 15. Add code below to `user.js`
 
@@ -404,7 +402,7 @@ router.post(
 
 16. Test using postman.
 
-# Make Route to Get User.
+### Make Route to Get User.
 
 17. We get tokens back from both user signup and user login, now lets add route to get a user via token. Add code below.
 
@@ -452,7 +450,7 @@ This function will be used to verify the users token
 
 ![token](./images/getToken.png)
 
-# Make Controller file for user routes and clean up routes file
+### Make Controller file for user routes and clean up routes file
 
 This folder will help us when we add more routes to this API keeping our route files shorter and more manageable
 
@@ -622,7 +620,7 @@ router.get("/me", auth, getMe);
 module.exports = router;
 ```
 
-# Adding frontend to our node app via React
+### Adding frontend to our node app via React
 
 We will be using [Create React App](https://github.com/facebook/create-react-app) for initiating our project. This Frontend react app will live at the root of your node app. Look below for file structure.
 
@@ -1320,4 +1318,4 @@ Now you should have something fully functional, to test:
 - user should be able to signup
 - user should be able to login and see private home page.
 
-### Now you know how to make a production ready authentication API utilizing the MERN stack. Learn this well, and dont forget to give my [repo](https://github.com/gregdbanks/my_authentication_2.0) a star.
+### Congrats, you made it through. This wraps up this guide. Now you know how to make a production ready authentication API utilizing the MERN stack, and what you do from this point is your choice. The sky's is the limit. Dont forget to give my [repo](https://github.com/gregdbanks/my_authentication_2.0) a star, and thanks for reading.
