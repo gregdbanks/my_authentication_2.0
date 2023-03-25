@@ -1319,3 +1319,10 @@ Now you should have something fully functional, to test:
 - user should be able to login and see private home page.
 
 ### Congrats, you made it through. This wraps up this guide. Now you know how to make a production ready authentication API utilizing the MERN stack, and what you do from this point is your choice. The sky's is the limit. Dont forget to give my [repo](https://github.com/gregdbanks/my_authentication_2.0) a star, and thanks for reading.
+
+<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="RwYbMoM" data-user="greggy20053" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/greggy20053/pen/RwYbMoM">
+  Basic Usage - antd@5.2.0</a> by Greg (<a href="https://codepen.io/greggy20053">@greggy20053</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
