@@ -1075,10 +1075,34 @@ Now that we have a sign up page, we need to be able to show a new user their hom
 14. Update sendDetailsToServer function in `SignUp.js` and add import from constants
 
 ```js
-...
+import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+
 import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
-...
+const SignUp = ({ showError, updateTitle }) => {
+  const history = useHistory();
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if (user.password === user.confirmPassword) {
+      sendDetailsToServer();
+    } else {
+      showError("Passwords do not match");
+    }
+  };
 
   const sendDetailsToServer = () => {
     if (user.email.length && user.password.length) {
@@ -1108,9 +1132,78 @@ import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
           console.log(error);
         });
     } else {
-      props.showError("Please enter valid username and password");
+      showError("Please enter valid username and password");
     }
   };
+  const redirectToHome = () => {
+    history.push("/home");
+    updateTitle("Home");
+  };
+  return (
+    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+      <form>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputUsername">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            aria-describedby="usernameHelp"
+            placeholder="Enter username"
+            value={user.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            value={user.email}
+            onChange={handleChange}
+          />
+          <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputPassword1">Confirm Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="confirmPassword"
+            placeholder="Password"
+            value={user.confirmPassword}
+            onChange={handleChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleSubmitClick}
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default SignUp;
 ```
 
 We use `localStorage.setItem` to store the token received from backend API to browser’s local storage.
