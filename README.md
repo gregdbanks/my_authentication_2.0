@@ -832,13 +832,36 @@ export const ACCESS_TOKEN_NAME = "login_access_token";
 ```js
 import React, { useState } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../../constants/apiConstants";
+import { useHistory } from "react-router-dom";
 
-export default function SignUp(props) {
-  // ...
+import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
+
+const SignUp = ({ showError, updateTitle }) => {
+  const history = useHistory();
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if (user.password === user.confirmPassword) {
+      sendDetailsToServer();
+    } else {
+      showError("Passwords do not match");
+    }
+  };
+
   const sendDetailsToServer = () => {
     if (user.email.length && user.password.length) {
-      props.showError(null);
+      showError(null);
       const payload = {
         username: user.username,
         email: user.email,
@@ -853,25 +876,89 @@ export default function SignUp(props) {
               successMessage:
                 "Registration successful. Redirecting to home page..",
             }));
+            localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
             redirectToHome();
-            props.showError(null);
+            showError(null);
           } else {
-            props.showError("Some error ocurred");
+            showError("Some error ocurred");
           }
         })
         .catch(function (error) {
           console.log(error);
         });
     } else {
-      props.showError("Please enter valid username and password");
+      showError("Please enter valid username and password");
     }
   };
   const redirectToHome = () => {
-    props.updateTitle("Home");
-    props.history.push("/home");
+    history.push("/home");
+    updateTitle("Home");
   };
-  // ...
-}
+  return (
+    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+      <form>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputUsername">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            aria-describedby="usernameHelp"
+            placeholder="Enter username"
+            value={user.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            value={user.email}
+            onChange={handleChange}
+          />
+          <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group text-left">
+          <label htmlFor="exampleInputPassword1">Confirm Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="confirmPassword"
+            placeholder="Password"
+            value={user.confirmPassword}
+            onChange={handleChange}
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleSubmitClick}
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default SignUp;
 ```
 
 11. Setup Client side routing by installing `react-router-dom`
@@ -995,7 +1082,7 @@ import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
   const sendDetailsToServer = () => {
     if (user.email.length && user.password.length) {
-      props.showError(null);
+      showError(null);
       const payload = {
         username: user.username,
         email: user.email,
@@ -1012,9 +1099,9 @@ import { API_BASE_URL, ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
             }));
             localStorage.setItem(ACCESS_TOKEN_NAME, response.data.token);
             redirectToHome();
-            props.showError(null);
+            showError(null);
           } else {
-            props.showError("Some error ocurred");
+            showError("Some error ocurred");
           }
         })
         .catch(function (error) {
@@ -1231,7 +1318,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header title={title} />
+        <Header title={title} updateTitle={updateTitle} />
         <div className="container d-flex align-items-center flex-column">
           <Switch>
             <Route path="/" exact={true}>
@@ -1273,18 +1360,21 @@ import { withRouter } from "react-router-dom";
 
 import { ACCESS_TOKEN_NAME } from "../../constants/apiConstants";
 
-function Header(props) {
+const Header = (props) => {
   const capitalize = (s) => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
+
   let title = capitalize(
     props.location.pathname.substring(1, props.location.pathname.length)
   );
+
   if (props.location.pathname === "/") {
     title = "Welcome";
   }
-  function renderLogout() {
+
+  const renderLogout = () => {
     if (props.location.pathname === "/home") {
       return (
         <div className="ml-auto">
@@ -1294,11 +1384,14 @@ function Header(props) {
         </div>
       );
     }
-  }
-  function handleLogout() {
+  };
+
+  const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN_NAME);
+    props?.updateTitle("Login");
     props.history.push("/login");
-  }
+  };
+
   return (
     <nav className="navbar navbar-dark bg-primary">
       <div className="row col-12 d-flex justify-content-center text-white">
@@ -1307,7 +1400,8 @@ function Header(props) {
       </div>
     </nav>
   );
-}
+};
+
 export default withRouter(Header);
 ```
 
