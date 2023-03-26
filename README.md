@@ -1500,6 +1500,20 @@ export default withRouter(Header);
 
 The title is determined by which page, and the logout button only shows if you are on the home page.
 
+Now to get everything working remove `<React.Strict>` from index.js like:
+
+```js
+...
+root.render(
+  <>
+    <Router history={history}>
+      <App />
+    </Router>
+  </>
+);
+...
+```
+
 Now you should have something fully functional, to test:
 
 - user should be able to signup
